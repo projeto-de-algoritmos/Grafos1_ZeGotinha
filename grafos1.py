@@ -45,19 +45,24 @@ class Grafo(object):
                 if vizinho not in visitados:
                     dfs_recursiva(grafo, vizinho)
         dfs_recursiva(grafo, vertice)
+        return visitados
 
     def retorna_grafo(self):
         arestas = self.gerar_arestas()
         grafo.adiciona_arestas(arestas)
         nos = self.get_nos()
         lista_adja = self.adj
+        busca = self.dfs(lista_adja, 'A')
+        if len(busca) != len(nos):
+            self.adj = defaultdict(set)
+            self.retorna_grafo()
         # print("NOS")
         # print(nos)
         # print("VISITAS")
-        self.dfs(lista_adja, 'A')
         # print("ADJS")
         # print(lista_adja)
         # print(valores)
+           
 
     def __len__(self):
         return len(self.adj)
