@@ -17,8 +17,8 @@ class Grafo(object):
         self.n_nos = n
 
     def gerar_arestas(self):
-        nos = list(string.ascii_uppercase)
-        qtd_nos = random.randint(2, 26)
+        nos = list(string.printable)
+        qtd_nos = random.randint(2, 100)
         self.set_nnos(qtd_nos)
         # print(qtd_nos)
         max_arestas = random.randint(qtd_nos-1, (qtd_nos*(qtd_nos-1))//2)
@@ -61,7 +61,7 @@ class Grafo(object):
         self.adiciona_arestas(arestas)
         nos = self.get_nos()
         lista_adja = self.adj
-        busca = self.dfs(lista_adja, 'A')
+        busca = self.dfs(lista_adja, '0')
         if len(busca) != len(nos):
             self.adj = defaultdict(set)
             self.retorna_grafo()
@@ -100,23 +100,23 @@ class Grafo(object):
         self.ciclos = 0
         self.contaminados = []
         self.n_contaminados = 0
-        self.adiciona_contagio('A')
+        self.adiciona_contagio('0')
 
     def calcula_ciclos_sem_vacina(self):
         print(self.adj)
-        self.adiciona_contagio('A')
+        self.adiciona_contagio('0')
         print()
         
         while (self.n_contaminados != self.n_nos):
             self.contamina_2()
-        print("Sem vacina: ","Número contaminados:", self.n_contaminados, "Ciclos:", self.ciclos)
+        print("Em uma população com", self.n_nos, "pessoas não vacinadas, levariam", self.ciclos * 7, "dias para a contaminação de toda a população.")
     
     def calcula_ciclos_com_vacina(self):
         print()
         self.zerar_dados()
         while (self.n_contaminados != self.n_nos):
             self.contamina_1()
-        print("Com vacina: ","Número contaminados:", self.n_contaminados, "Ciclos:", self.ciclos)
+        print("Já na mesma população mas com todos vacinados, considerando que a taxa de transmissão após a vacina é reduzida pela metade, são necessários", 7 * self.ciclos, "dias.")
     
 
     def __len__(self):
