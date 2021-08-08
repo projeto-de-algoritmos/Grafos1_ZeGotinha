@@ -1,11 +1,32 @@
 from collections import defaultdict
+import random
+import string
+
 
 class Grafo(object):
 
-    def __init__(self, arestas):
+    def __init__(self):
         self.adj = defaultdict(set)
         # self.adj = [[] for _ in range(10)]
-        self.adiciona_arestas(arestas)
+
+    def gerar_arestas(self):
+        nos = list(string.ascii_uppercase)
+        qtd_nos = random.randint(2, 26)
+        print(qtd_nos)
+        max_arestas = random.randint(qtd_nos-1, (qtd_nos*(qtd_nos-1))//2)
+        print(max_arestas)
+        arestas = []
+        print(nos)
+        for n in range(max_arestas):
+            while True:
+                v = nos[random.randint(0, qtd_nos-1)]
+                u = nos[random.randint(0, qtd_nos-1)]
+                if v != u and tuple((v, u)) not in arestas:
+                    arestas.append(tuple((v,u)))
+                    break
+        print(arestas)
+        return arestas
+
 
     def get_vertices(self):
         return list(self.adj.keys())
@@ -34,10 +55,9 @@ class Grafo(object):
         return self.adj[v]
 
 if __name__ in "__main__":
-    arestas = [('A', 'B'), ('B', 'C'), ('B', 'D'), ('C', 'B'), ('C', 'E'), ('D', 'A'), ('E', 'B')]
-
-    grafo = Grafo(arestas)
+    grafo = Grafo()
+    grafo.adiciona_arestas(grafo.gerar_arestas())
     print(grafo.adj)
-    print(grafo.get_vertices())
-    print(grafo.get_arestas())
-    print(grafo.existe_aresta('A', 'B'), grafo.existe_aresta('E', 'C'))
+    #print(grafo.get_vertices())
+    #print(grafo.get_arestas())
+    #print(grafo.existe_aresta('A', 'B'), grafo.existe_aresta('E', 'C'))
