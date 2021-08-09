@@ -111,7 +111,7 @@ class Grafo(object):
     def __str__(self):
         return '{}({})'.format(self.__class__.__name__, dict(self.adj))
     
-     def retorna_grafo(self):
+    def retorna_grafo(self):
         arestas = self.gerar_arestas()
         self.adiciona_arestas(arestas)
         nos = self.get_nos()
