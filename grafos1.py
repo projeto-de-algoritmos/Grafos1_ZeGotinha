@@ -1,17 +1,17 @@
 from collections import defaultdict
 import random
 import string
-
+import matplotlib.pyplot as plt
 
 class Grafo(object):
 
     def __init__(self):
         self.adj = defaultdict(set)
         self.n_nos = 0
-        self.ciclos = 0
+        self.ciclos1 = 0
+        self.ciclos2 = 0
         self.n_contaminados = 0
         self.contaminados = []
-        # self.adj = [[] for _ in range(10)]
 
     def set_nnos(self, n):
         self.n_nos = n
@@ -20,11 +20,8 @@ class Grafo(object):
         nos = list(string.printable)
         qtd_nos = random.randint(2, 100)
         self.set_nnos(qtd_nos)
-        # print(qtd_nos)
         max_arestas = random.randint(qtd_nos-1, (qtd_nos*(qtd_nos-1))//2)
-        # print(max_arestas)
         arestas = []
-        # print(nos)
         for n in range(max_arestas):
             while True:
                 v = nos[random.randint(0, qtd_nos-1)]
@@ -49,7 +46,6 @@ class Grafo(object):
         visitados = list()
         def dfs_recursiva(grafo, vertice):
             visitados.append(vertice)
-            # print(visitados)
             for vizinho in grafo[vertice]:
                 if vizinho not in visitados:
                     dfs_recursiva(grafo, vizinho)
@@ -64,14 +60,7 @@ class Grafo(object):
         busca = self.dfs(lista_adja, '0')
         if len(busca) != len(nos):
             self.adj = defaultdict(set)
-            self.retorna_grafo()
-        # print("NOS")
-        # print(nos)
-        # print("VISITAS")
-        # print("ADJS")
-        # print(lista_adja)
-        # print(valores)
-           
+            self.retorna_grafo()           
 
     def adiciona_contagio(self, u):
         self.contaminados.append(u)
@@ -86,7 +75,7 @@ class Grafo(object):
                     contagio += 1
                 if contagio == 2:
                     break
-        self.ciclos += 1
+        self.ciclos2 += 1
 
     def contamina_1(self):        
         for n in self.contaminados.copy():
@@ -94,30 +83,40 @@ class Grafo(object):
                 if m not in self.contaminados:
                     self.adiciona_contagio(m)
                     break;
-        self.ciclos += 1
+        self.ciclos1 += 1
     
     def zerar_dados(self):
-        self.ciclos = 0
         self.contaminados = []
         self.n_contaminados = 0
         self.adiciona_contagio('0')
 
     def calcula_ciclos_sem_vacina(self):
-        print(self.adj)
         self.adiciona_contagio('0')
         print()
         
         while (self.n_contaminados != self.n_nos):
             self.contamina_2()
-        print("Em uma população com", self.n_nos, "pessoas não vacinadas, levariam", self.ciclos * 7, "dias para a contaminação de toda a população.")
+        print("Em uma população com", self.n_nos, "pessoas não vacinadas, levariam", self.ciclos2 * 7, "dias para a contaminação de toda a população.")
     
     def calcula_ciclos_com_vacina(self):
         print()
         self.zerar_dados()
         while (self.n_contaminados != self.n_nos):
             self.contamina_1()
-        print("Já na mesma população mas com todos vacinados, considerando que a taxa de transmissão após a vacina é reduzida pela metade, são necessários", 7 * self.ciclos, "dias.")
+        print("Já na mesma população mas com todos vacinados, considerando que a taxa de transmissão após a vacina é reduzida pela metade, são necessários", 7 * self.ciclos1, "dias.")
     
+    def plotar_grafico(self):
+        populacao = ['Não Vacinada', 'Vacinada']
+        ciclos = [self.ciclos2 * 7, self.ciclos1 * 7]
+
+        plt.bar(populacao, ciclos, color = "#8B0000")
+
+        plt.xticks(populacao)
+        plt.ylabel("Número de dias")
+        plt.xlabel("Estado da população")
+        plt.title("Número de dias até uma contaminação completa \nX\n População vacinada e não vacinada")
+        plt.axhline(self.ciclos2 * 7, 0, 1, color="#00BFFF", **{'ls':'--', 'lw':5})
+        plt.show()
 
     def __len__(self):
         return len(self.adj)
@@ -134,3 +133,4 @@ if __name__ in "__main__":
 
     grafo.calcula_ciclos_sem_vacina()
     grafo.calcula_ciclos_com_vacina()
+    grafo.plotar_grafico()
