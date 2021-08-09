@@ -34,9 +34,6 @@ class Grafo(object):
     def get_nos(self):
         return list(self.adj.keys())
 
-    def get_arestas(self):
-        return [(k, v) for k in self.adj.keys() for v in self.adj[k]]
-
     def adiciona_arestas(self, arestas):
         for u, v in arestas:
             self.adj[u].add(v)
@@ -51,17 +48,7 @@ class Grafo(object):
                     dfs_recursiva(grafo, vizinho)
         dfs_recursiva(grafo, vertice)
         return visitados
-
-    def retorna_grafo(self):
-        arestas = self.gerar_arestas()
-        self.adiciona_arestas(arestas)
-        nos = self.get_nos()
-        lista_adja = self.adj
-        busca = self.dfs(lista_adja, '0')
-        if len(busca) != len(nos):
-            self.adj = defaultdict(set)
-            self.retorna_grafo()           
-
+    
     def adiciona_contagio(self, u):
         self.contaminados.append(u)
         self.n_contaminados += 1
@@ -96,14 +83,14 @@ class Grafo(object):
         
         while (self.n_contaminados != self.n_nos):
             self.contamina_2()
-        print("Em uma população com", self.n_nos, "pessoas não vacinadas, levariam", self.ciclos2 * 7, "dias para a contaminação de toda a população.")
+        print("Pessoas NÃO vacinadas: ", self.n_nos, "| Dias necessários para contaminar toda população: ", self.ciclos2 * 7, "dias")
     
     def calcula_ciclos_com_vacina(self):
         print()
         self.zerar_dados()
         while (self.n_contaminados != self.n_nos):
             self.contamina_1()
-        print("Já na mesma população mas com todos vacinados, considerando que a taxa de transmissão após a vacina é reduzida pela metade, são necessários", 7 * self.ciclos1, "dias.")
+        print("Pessoas JÁ vacinadas: ", self.n_nos, "| Dias necessários para contaminar toda população: ", 7 * self.ciclos1, "dias")
     
     def plotar_grafico(self):
         populacao = ['Não Vacinada', 'Vacinada']
@@ -123,14 +110,21 @@ class Grafo(object):
 
     def __str__(self):
         return '{}({})'.format(self.__class__.__name__, dict(self.adj))
-
-    def __getitem__(self, v):
-        return self.adj[v]
-
+    
+     def retorna_grafo(self):
+        arestas = self.gerar_arestas()
+        self.adiciona_arestas(arestas)
+        nos = self.get_nos()
+        busca = self.dfs(self.adj, '0')
+        if len(busca) != len(nos):
+            self.adj = defaultdict(set)
+            self.retorna_grafo()
+        print("Tamanho do grafo: ", self.__len__())
+        grafo.calcula_ciclos_sem_vacina()
+        grafo.calcula_ciclos_com_vacina()
+        grafo.plotar_grafico()
+            
+            
 if __name__ in "__main__":
     grafo = Grafo()
     grafo.retorna_grafo()
-
-    grafo.calcula_ciclos_sem_vacina()
-    grafo.calcula_ciclos_com_vacina()
-    grafo.plotar_grafico()
