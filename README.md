@@ -27,6 +27,9 @@ O trabalho tem o intuito de fazer um comparativo de tempo gasto para a transmiss
 **Framework**: (caso exista)<br>
 Requisitos: 
 - Python 3.8 ou superior instalado;
+- Biblioteca matplotlib instalada;  
+    Para instalação:  
+    ```pip3 install matplotlib```
 
 Como executar o programa:
 1. Clone o repositório
