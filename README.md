@@ -15,9 +15,10 @@ O trabalho tem o intuito de fazer um comparativo de tempo gasto para a transmiss
 - 1 pessoa JÁ vacinada: contamina 1 pessoa.
 
 ## Screenshots
+<!-- |Exemplo de contaminação via terminal | ![https://i.ibb.co/Z194KwD/Captura-de-tela-de-2021-08-08-21-46-45.png](https://i.ibb.co/Z194KwD/Captura-de-tela-de-2021-08-08-21-46-45.png)| -->
 | Descrição | Imagem |
 |:-- | :-- |
-|Exemplo de contaminação via terminal | ![https://i.ibb.co/Z194KwD/Captura-de-tela-de-2021-08-08-21-46-45.png](https://i.ibb.co/Z194KwD/Captura-de-tela-de-2021-08-08-21-46-45.png)|
+| Exemplo de execução via terminal | ![image](https://user-images.githubusercontent.com/43728276/128654132-2f01390f-b16f-48d2-8420-1e5e677308a2.png)|
 | Gráfico gerado + resultado via terminal | ![https://i.ibb.co/mbnj6KY/Captura-de-tela-de-2021-08-08-21-57-03.png](https://i.ibb.co/mbnj6KY/Captura-de-tela-de-2021-08-08-21-57-03.png)|
 | Gráfico expandido | ![https://i.ibb.co/02H5GTY/Captura-de-tela-de-2021-08-08-21-46-37.png](https://i.ibb.co/02H5GTY/Captura-de-tela-de-2021-08-08-21-46-37.png)|
 
@@ -37,4 +38,5 @@ git clone https://github.com/projeto-de-algoritmos/Grafos1_ZeGotinha.git
 python3 grafos1.py
 ```
 
-
+## Uso
+Após a execução, o gráfico estará ativo. Feche o popup do gráfico para finalizar a execução do programa. 
