@@ -18,6 +18,7 @@ O trabalho tem o intuito de fazer um comparativo de tempo gasto para a transmiss
 <!-- |Exemplo de contaminação via terminal | ![https://i.ibb.co/Z194KwD/Captura-de-tela-de-2021-08-08-21-46-45.png](https://i.ibb.co/Z194KwD/Captura-de-tela-de-2021-08-08-21-46-45.png)| -->
 | Descrição | Imagem |
 |:-- | :-- |
+| Vídeo | [![image](https://user-images.githubusercontent.com/43728276/128792351-c4543b5d-aef5-4a24-9d2c-15022df6cf4c.png)](https://www.youtube.com/watch?v=-VOlatPKAPo)|
 | Exemplo de execução via terminal | ![image](https://user-images.githubusercontent.com/43728276/128654132-2f01390f-b16f-48d2-8420-1e5e677308a2.png)|
 | Gráfico gerado + resultado via terminal | ![https://i.ibb.co/mbnj6KY/Captura-de-tela-de-2021-08-08-21-57-03.png](https://i.ibb.co/mbnj6KY/Captura-de-tela-de-2021-08-08-21-57-03.png)|
 | Gráfico expandido | ![https://i.ibb.co/02H5GTY/Captura-de-tela-de-2021-08-08-21-46-37.png](https://i.ibb.co/02H5GTY/Captura-de-tela-de-2021-08-08-21-46-37.png)|
